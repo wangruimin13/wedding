@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新婚快乐 | 祝福表姐</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffeef4 100%);
+            color: #7a3e5a;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 花瓣飘落效果 */
+        .petal {
+            position: absolute;
+            background: linear-gradient(to bottom right, #ffb6c1, #ff69b4);
+            border-radius: 50% 50% 0 50%;
+            opacity: 0.7;
+            z-index: 0;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 爱心跳动效果 */
+        .heart {
+            position: absolute;
+            color: #ff6b98;
+            animation: float 3s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.2); }
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #d43f6d;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #ff9eb5, #ff6b98);
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a55c80;
+            margin-top: 15px;
+        }
+
+        .couple-names {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #d43f6d;
+            margin: 30px 0;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-frame {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff9eb5, #ff6b98);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(212, 63, 109, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .photo-placeholder {
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+            background: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #d43f6d;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .blessing-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(122, 62, 90, 0.15);
+            transition: transform 0.5s, box-shadow 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(122, 62, 90, 0.25);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #ff9eb5, #ff6b98);
+        }
+
+        .card h3 {
+            color: #d43f6d;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .card h3 i {
+            margin-right: 10px;
+            color: #ff6b98;
+        }
+
+        .card p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #7a3e5a;
+        }
+
+        .animated-text {
+            display: inline-block;
+            overflow: hidden;
+            /* white-space: nowrap; */
+            animation: typing 3s steps(30, end) forwards;
+            width: 0;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            font-style: italic;
+            color: #a55c80;
+            font-size: 1.2rem;
+        }
+
+        .fireworks {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #ff6b98;
+            box-shadow: 0 0 10px #ff9eb5;
+            animation: firework 1.5s ease-out forwards;
+            z-index: 0;
+        }
+
+        @keyframes firework {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(0); opacity: 0; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #a55c80;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .couple-names {
+                font-size: 1.8rem;
+            }
+            
+            .photo-frame {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .photo-placeholder {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 飘落花瓣 -->
+    <div id="petals-container"></div>
+    
+    <!-- 跳动爱心 -->
+    <div id="hearts-container"></div>
+    
+    <!-- 烟花效果 -->
+    <div id="fireworks-container"></div>
+
+    <div class="container">
+        <header>
+            <h1 class="title">新婚快乐</h1>
+            <p class="subtitle">最美好的祝福送给最幸福的你们</p>
+        </header>
+        
+        <div class="couple-names">
+            新郎：郑重 &nbsp;&nbsp; 新娘：郭靖云
+        </div>
+        
+        <div class="photo-frame">
+            <div class="photo-placeholder">
+                <img width="72" src="./姐姐.jpg" alt="">
+                <img width="72" src="./姐夫.jpg" alt="">
+            </div>
+        </div>
+        
+        <div class="blessing-cards">
+            <div class="card">
+                <h3><i class="fas fa-heart"></i> 祝福语一</h3>
+                <p class="animated-text">亲爱的表姐，看着你穿上美丽的婚纱，走向幸福的红毯，我的心中充满了喜悦和感动。愿你们的爱情如美酒般，越陈越香；愿你们的生活如诗如画，甜蜜美满。</p>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-ring"></i> 祝福语二</h3>
+                <p class="animated-text">从今天起，你们将携手共度人生的每一个春夏秋冬。愿你们相互扶持，相濡以沫；愿你们笑颜常开，幸福永驻；愿你们的爱情故事，成为最美的传说。</p>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-glass-cheers"></i> 祝福语三</h3>
+                <p class="animated-text">在这特别的日子里，献上我最诚挚的祝福：愿你们的生活充满阳光与欢笑，愿你们的爱情永远新鲜如初，愿你们共同创造的美好未来，比梦想更加灿烂！</p>
+            </div>
+        </div>
+        
+        <div class="signature">
+            <p>永远爱你的表弟</p>
+            <p>2025年9月4日</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>祝表姐新婚快乐，永浴爱河！</p>
+    </footer>
+
+    <script>
+        // 创建花瓣飘落效果
+        function createPetals() {
+            const container = document.getElementById('petals-container');
+            const petalCount = 20;
+            
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                
+                // 随机大小
+                const size = Math.random() * 20 + 10;
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size}px`;
+                
+                // 随机位置
+                petal.style.left = `${Math.random() * 100}vw`;
+                petal.style.top = `-${Math.random() * 100}px`;
+                
+                // 随机动画时长
+                const duration = Math.random() * 10 + 5;
+                petal.style.animationDuration = `${duration}s`;
+                
+                // 随机延迟
+                const delay = Math.random() * 5;
+                petal.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(petal);
+            }
+        }
+        
+        // 创建跳动爱心
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartCount = 15;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                
+                // 随机位置
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.top = `${Math.random() * 100}vh`;
+                
+                // 随机大小
+                const size = Math.random() * 1 + 0.8;
+                heart.style.fontSize = `${size}rem`;
+                
+                // 随机动画延迟
+                const delay = Math.random() * 2;
+                heart.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(heart);
+            }
+        }
+        
+        // 创建烟花效果
+        function createFireworks() {
+            const container = document.getElementById('fireworks-container');
+            const fireworkCount = 30;
+            
+            for (let i = 0; i < fireworkCount; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.classList.add('fireworks');
+                    
+                    // 随机位置
+                    firework.style.left = `${Math.random() * 100}vw`;
+                    firework.style.bottom = '0';
+                    
+                    // 随机大小
+                    const size = Math.random() * 4 + 2;
+                    firework.style.width = `${size}px`;
+                    firework.style.height = `${size}px`;
+                    
+                    // 随机颜色
+                    const colors = ['#ff6b98', '#ff9eb5', '#ffb6c1', '#ff69b4'];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    firework.style.backgroundColor = color;
+                    firework.style.boxShadow = `0 0 10px ${color}`;
+                    
+                    container.appendChild(firework);
+                    
+                    // 动画结束后移除元素
+                    setTimeout(() => {
+                        firework.remove();
+                    }, 1500);
+                }, i * 500);
+            }
+        }
+        
+        // 初始化动画效果
+        window.onload = function() {
+            createPetals();
+            createHearts();
+            
+            // 页面加载后延迟触发烟花效果
+            setTimeout(createFireworks, 1000);
+            
+            // 每30秒重新创建烟花效果
+            setInterval(createFireworks, 30000);
+        };
+    </script>
+</body>
+</html>
